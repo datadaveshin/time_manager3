@@ -5,8 +5,8 @@ RSpec.describe User, type: :model do
     before do
       @user = User.create(
         email: "test@example.com",
-        password: "qwerty",
-        password_confirmation: "qwerty",
+        password: "12345678",
+        password_confirmation: "12345678",
         first_name: "John",
         last_name: "Doe"
       )
