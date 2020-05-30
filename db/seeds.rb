@@ -14,7 +14,16 @@
 #   last_name: "Doe"
 # )
 
+@user = User.create!(
+  email: "jdoe@example.com",
+  password: "12345678",
+  password_confirmation: "12345678",
+  first_name: "John",
+  last_name: "Doe"
+)
+puts "1 user created"
+
 100.times do |post|
-  Post.create!(date: Date.today, reason: "#{post} This is my reason")
+  Post.create!(date: Date.today, reason: "#{post} This is my reason", user_id: @user.id)
 end
 puts "created 100 posts"

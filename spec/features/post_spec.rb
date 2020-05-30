@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'Navigation' do
   before do
     User.destroy_all # NOTE DSS REMOVE ME LATER
-    user = User.create!(
+    @user = User.create!(
       email: "jdoe@example.com",
       password: "12345678",
       password_confirmation: "12345678",
@@ -11,23 +11,22 @@ describe 'Navigation' do
       last_name: "Doe"
     )
 
-    login_as(user, :scope => :user)
+    login_as(@user, :scope => :user)
+    visit posts_path
   end
-  
+
   describe 'Post#index' do
     it 'can be reached successfully' do
-      visit posts_path
       expect(page.status_code).to eq(200)
     end
 
     it 'has Post title' do
-      visit posts_path
       expect(page).to have_content(/Posts/)
     end
 
     it 'has a list of posts' do
-      post1 = Post.create(date: Date.today, reason: "Post1")
-      post2 = Post.create(date: Date.today, reason: "Post2")
+      post1 = Post.create(date: Date.today, reason: "Post1", user_id: @user.id)
+      post2 = Post.create(date: Date.today, reason: "Post2", user_id: @user.id)
       visit posts_path
       expect(page).to have_content(/Post1|Post2/)
     end
