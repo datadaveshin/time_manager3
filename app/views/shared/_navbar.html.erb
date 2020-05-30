@@ -2,11 +2,11 @@
   <h1>Time Tracker</h1>
 </div>
 <ul class="custom-nav nav nav-tabs">
-  <li class="nav-item">
+  <li class="<%= active?(root_path) %>">
     <%= link_to "Home", root_path %>
   </li>
-  <li class="nav-item">
-    <%= link_to "Post", posts_path %>
+  <li class="<%= active?(posts_path) %>">
+    <%= link_to "Time Entries", posts_path %>
   </li>
   <li class="nav-item dropdown pull-right">
      <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown">Account<strong class="caret"></strong></a>
