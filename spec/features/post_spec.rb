@@ -2,14 +2,8 @@ require 'rails_helper'
 
 describe 'Navigation' do
   before do
-    User.destroy_all # NOTE DSS REMOVE ME LATER
-    @user = User.create!(
-      email: "jdoe@example.com",
-      password: "12345678",
-      password_confirmation: "12345678",
-      first_name: "John",
-      last_name: "Doe"
-    )
+
+    @user = FactoryBot.create(:user)
 
     login_as(@user, :scope => :user)
     visit posts_path
@@ -32,7 +26,6 @@ describe 'Navigation' do
     end
   end
 
-# User.destroy_all
   describe 'Creation' do
     describe 'Post#new' do
       before do
@@ -59,6 +52,5 @@ describe 'Navigation' do
         expect(User.last.posts.last.reason).to eq("User Association")
       end
     end
-    # after(:all) { User.destroy_all } # NOTE DSS REMOVE ME LATER
   end
 end

@@ -33,6 +33,4 @@ RSpec.describe User, type: :model do
       expect(@user.full_name).to eq("DOE, JOHN")
     end
   end
-
-  after(:all) { User.destroy_all }
 end
