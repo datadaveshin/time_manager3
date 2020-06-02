@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Post, type: :model do
   describe ".create" do
     before do
-      @post = Post.create(date: Date.today, reason: "shipment late")
+      @post = FactoryBot.create(:post)
     end
 
     it "works" do
@@ -20,5 +20,4 @@ RSpec.describe Post, type: :model do
       expect(@post.reason).to be_falsey
     end
   end
-  after (:all) {Post.destroy_all}
 end
