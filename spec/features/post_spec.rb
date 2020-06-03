@@ -2,14 +2,8 @@ require 'rails_helper'
 
 describe 'Navigation' do
   before do
-    User.destroy_all # NOTE DSS REMOVE ME LATER
-    @user = User.create!(
-      email: "jdoe@example.com",
-      password: "12345678",
-      password_confirmation: "12345678",
-      first_name: "John",
-      last_name: "Doe"
-    )
+
+    @user = FactoryBot.create(:user)
 
     login_as(@user, :scope => :user)
     visit posts_path
@@ -25,14 +19,13 @@ describe 'Navigation' do
     end
 
     it 'has a list of posts' do
-      post1 = Post.create(date: Date.today, reason: "Post1", user_id: @user.id)
-      post2 = Post.create(date: Date.today, reason: "Post2", user_id: @user.id)
+      post1 = FactoryBot.create(:post)
+      post2 = FactoryBot.create(:second_post)
       visit posts_path
-      expect(page).to have_content(/Post1|Post2/)
+      expect(page).to have_content(/First|Second/)
     end
   end
 
-# User.destroy_all
   describe 'Creation' do
     describe 'Post#new' do
       before do
@@ -59,6 +52,5 @@ describe 'Navigation' do
         expect(User.last.posts.last.reason).to eq("User Association")
       end
     end
-    # after(:all) { User.destroy_all } # NOTE DSS REMOVE ME LATER
   end
 end
