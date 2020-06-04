@@ -2,14 +2,15 @@ require 'rails_helper'
 
 describe 'Navigation' do
   before do
-
     @user = FactoryBot.create(:user)
-
     login_as(@user, :scope => :user)
-    visit posts_path
   end
 
   describe 'Post#index' do
+    before do
+      visit posts_path
+    end
+
     it 'can be reached successfully' do
       expect(page.status_code).to eq(200)
     end
